@@ -4,8 +4,8 @@
 
 Add to your requirements file:
 
-`git+git://github.com/giussepi/g_utils.git`
+`git+git://github.com/giussepi/gutils.git`
 
 or run
 
-`pip install git+git://github.com/giussepi/g_utils.git`
+`pip install git+git://github.com/giussepi/gutils.git`

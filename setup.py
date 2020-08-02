@@ -24,7 +24,7 @@ setuptools.setup(
     description="Several basic utilities",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/giussepi/g_utils",
+    url="https://github.com/giussepi/gutils",
     packages=setuptools.find_packages(),
     classifiers=[
         "Programming Language :: Python :: 3",
