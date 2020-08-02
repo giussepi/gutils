@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
-""" utils/test/test_files """
+""" gutils/test/test_files """
 
 import os
 import re
 import unittest
 
-from g_utils.files import clean_json_filename, get_filename_and_extension
+from gutils.files import clean_json_filename, get_filename_and_extension
 
 
 class Test_get_filename_and_extension(unittest.TestCase):

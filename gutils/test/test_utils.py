@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
-""" utils/test/test_utils """
+""" gutils/test/test_utils """
 
 import re
 import unittest
 
-from g_utils.utils import get_random_string
+from gutils.utils import get_random_string
 
 
 class Test_get_random_string(unittest.TestCase):

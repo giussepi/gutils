@@ -1,11 +1,12 @@
 # -*- coding: utf-8 -*-
+""" gutils/test/test_decorators """
 
 import io
 import re
 import unittest
 import unittest.mock
 
-from g_utils.decorators import timing
+from gutils.decorators import timing
 
 
 mock_stdout = unittest.mock.patch('sys.stdout', new_callable=io.StringIO)

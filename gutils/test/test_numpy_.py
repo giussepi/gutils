@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
-""" utils/test/test_numpy_ """
+""" gutils/test/test_numpy_ """
 
 import unittest
 
 import numpy as np
 from scipy import linalg
 
-from g_utils.numpy_ import colnorms_squared_new, normcols
+from gutils.numpy_ import colnorms_squared_new, normcols
 
 
 class MatrixMixin:

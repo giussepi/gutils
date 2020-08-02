@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
-""" utils/test/test_folders """
+""" gutils/test/test_folders """
 
 import os
 import unittest
 
-from g_utils.folders import remove_folder, clean_create_folder
+from gutils.folders import remove_folder, clean_create_folder
 
 
 class FolderMixin:

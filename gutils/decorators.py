@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-""" utils/decorators """
+""" gutils/decorators """
 
 from functools import wraps
 from time import time

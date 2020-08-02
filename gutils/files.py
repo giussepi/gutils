@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
-""" utils/files """
+""" gutils/files """
 
 import os
-from g_utils.utils import get_random_string
+from gutils.utils import get_random_string
 
 
 def get_filename_and_extension(string_):
