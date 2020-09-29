@@ -33,6 +33,26 @@ def colnorms_squared_new(matrix, blocksize=-1):
     return cols_norms
 
 
+def get_unique_rows(matrix):
+    """
+    Returns a matrix containing only unique rows
+
+    Source: https://www.w3resource.com/python-exercises/numpy/python-numpy-exercise-87.php
+
+    Args:
+        matrix (np.ndarray)
+    Returns:
+        np.ndarray
+    """
+    assert isinstance(matrix, np.ndarray)
+
+    y = np.ascontiguousarray(matrix).view(
+        np.dtype((np.void, matrix.dtype.itemsize * matrix.shape[1])))
+    _, idx = np.unique(y, return_index=True)
+
+    return matrix[idx]
+
+
 def normcols(matrix):
     """
     Returns an array with columns normalised
