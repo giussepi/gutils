@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-""" gutils/numpy_ """
+""" gutils/numpy_/numpy_ """
 
 import scipy as sp
 import numpy as np
