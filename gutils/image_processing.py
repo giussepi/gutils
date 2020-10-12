@@ -17,7 +17,6 @@ def get_slices_coords(dim_axis, patch_size=16, patch_overlapping=0):
     Returns:
         iterator
     """
-    # TODO: write its tests
     stride = patch_size-patch_overlapping
     last_coord = None
 
@@ -31,26 +30,32 @@ def get_slices_coords(dim_axis, patch_size=16, patch_overlapping=0):
         yield dim_axis-patch_size
 
 
-def get_patches(img, patch_size=16, patch_overlapping=0):
+def get_patches(img, patch_width=16, patch_height=0, patch_overlapping=0):
     """
-    Calculates and returns an iterator over the patches coordinates following the patch_size
-    and patch_overlapping provided
+    Calculates and returns an iterator over the patches coordinates following the patch width,
+    height, and patch_overlapping provided. If not patch_height is provided then it set to
+    path_width by default.
 
     Args:
         img        (np.ndarray): image loaded using numpy
-        patch_size        (int): size of the patchw
+        patch_width       (int): width of the patch
+        patch_height      (int): height of the patch
         patch_overlapping (int): overlap of patches
 
     Returns:
         iterator
     """
     # TODO: find out how it should work when using a 3-channel image (colored one)
-    # TODO: write its tests
     assert isinstance(img, np.ndarray)
-    assert isinstance(patch_size, int)
+    assert isinstance(patch_width, int)
+    assert patch_width > 0
+    assert isinstance(patch_height, int)
+    assert patch_height >= 0
     assert isinstance(patch_overlapping, int)
 
-    for x in get_slices_coords(img.shape[0], patch_size, patch_overlapping):
-        for y in get_slices_coords(img.shape[1], patch_size, patch_overlapping):
-            yield img[x:x+patch_size, y:y+patch_size]
-            # yield([(x, x+patch_size), (y, y+patch_size)])
+    if patch_height == 0:
+        patch_height = patch_width
+
+    for x in get_slices_coords(img.shape[0], patch_width, patch_overlapping):
+        for y in get_slices_coords(img.shape[1], patch_height, patch_overlapping):
+            yield img[x:x+patch_width, y:y+patch_height]
