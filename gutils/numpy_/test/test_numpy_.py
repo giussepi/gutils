@@ -56,8 +56,8 @@ class Test_LabelMatrixManager(unittest.TestCase):
         ))
 
     def test_get_1d_array_from_2d_matrix(self):
-        self.assertTrue(
-            LabelMatrixManager.get_1d_array_from_2d_matrix(self.labels_2d), self.labels_2d)
+        self.assertTrue(np.array_equal(
+            LabelMatrixManager.get_1d_array_from_2d_matrix(self.labels_2d), self.labels_1d))
 
 
 if __name__ == '__main__':

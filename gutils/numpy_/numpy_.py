@@ -111,7 +111,7 @@ class LabelMatrixManager:
         Transforms the 2D one-hot-encoded label_matrix to 1D integer-encoded label array
 
         Returns:
-            matrix array (np.ndarray) with shape (num_samples, ). E.g.:
+            label array (np.ndarray) with shape (num_samples, ). E.g.:
             The 2D matrix [[1 0 1 0 0],
                            [0 1 0 0 0],
                            [0 0 0 1 1]]
@@ -123,4 +123,4 @@ class LabelMatrixManager:
         label_matrix = label_matrix.squeeze()
         assert len(label_matrix.shape) == 2
 
-        return [label_matrix[:, col].nonzero()[0][0] for col in range(label_matrix.shape[1])]
+        return np.array([label_matrix[:, col].nonzero()[0][0] for col in range(label_matrix.shape[1])])
