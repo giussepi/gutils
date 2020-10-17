@@ -68,33 +68,59 @@ def normcols(matrix):
     return matrix/sp.linalg.norm(matrix, axis=0)
 
 
-def format_label_matrix(label_matrix, sorted_labels=None):
-    """
-    Transforms the 1-d label_matrix to 2-D label_matrix and returns it
+class LabelMatrixManager:
+    """ Holds methods to transform label matrices from 1D to 2D and vice versa """
 
-    Args:
-        label_matrix   (np.ndarray): 1-D array
-        sorted_labels (list, tuple): iterable with labels in the order to be used to create
-                                     the 2-D label matrix
+    @staticmethod
+    def get_2d_matrix_from_1d_array(label_array, sorted_labels=None):
+        """
+        Transforms the 1D integer-encoded label_array to a 2D one-hot-encoded label_array
+        and returns it
 
-    Returns:
-        label matrix (np.ndarray) with shape (num labels, num samples) e.g.:
-        [0, 1, 0, 2, 2] is returned as:
+        Args:
+            label_array    (np.ndarray): 1-D integer-encoded numpy array
+            sorted_labels (list, tuple): iterable with labels in the order to be used to create
+                                         the 2-D label matrix
 
-        [[1 0 1 0 0],
-         [0 1 0 0 0],
-         [0 0 0 1 1]]
-    """
-    assert isinstance(label_matrix, np.ndarray)
-    assert len(label_matrix.shape) == 1
+        Returns:
+            label matrix (np.ndarray) with shape (num labels, num samples). E.g.:
+            The array [0, 1, 0, 2, 2] is returned as:
 
-    if sorted_labels is not None:
-        assert isinstance(sorted_labels, (list, tuple))
+            [[1 0 1 0 0],
+             [0 1 0 0 0],
+             [0 0 0 1 1]]
+        """
+        assert isinstance(label_array, np.ndarray)
+        label_array = label_array.squeeze()
+        assert len(label_array.shape) == 1
 
-    labels = sorted_labels if sorted_labels else sorted(set(label_matrix))
-    lmatrix = np.zeros([len(labels), label_matrix.shape[0]], dtype=np.int32)
+        if sorted_labels is not None:
+            assert isinstance(sorted_labels, (list, tuple))
 
-    for label, row in zip(labels, range(len(labels))):
-        lmatrix[row][label_matrix == label] = 1
+        labels = sorted_labels if sorted_labels else sorted(set(label_array))
+        lmatrix = np.zeros([len(labels), label_array.shape[0]], dtype=np.int32)
 
-    return lmatrix
+        for label, row in zip(labels, range(len(labels))):
+            lmatrix[row][label_array == label] = 1
+
+        return lmatrix
+
+    @staticmethod
+    def get_1d_array_from_2d_matrix(label_matrix):
+        """
+        Transforms the 2D one-hot-encoded label_matrix to 1D integer-encoded label array
+
+        Returns:
+            matrix array (np.ndarray) with shape (num_samples, ). E.g.:
+            The 2D matrix [[1 0 1 0 0],
+                           [0 1 0 0 0],
+                           [0 0 0 1 1]]
+
+            is returned as:
+            [0, 1, 0, 2, 2]
+        """
+        assert isinstance(label_matrix, np.ndarray)
+        label_matrix = label_matrix.squeeze()
+        assert len(label_matrix.shape) == 2
+
+        return [label_matrix[:, col].nonzero()[0][0] for col in range(label_matrix.shape[1])]

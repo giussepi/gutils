@@ -6,7 +6,7 @@ import unittest
 import numpy as np
 from scipy import linalg
 
-from gutils.numpy_.numpy_ import colnorms_squared_new, normcols, format_label_matrix
+from gutils.numpy_.numpy_ import colnorms_squared_new, normcols, LabelMatrixManager
 
 
 class MatrixMixin:
@@ -30,25 +30,34 @@ class Test_normcols(MatrixMixin, unittest.TestCase):
             self.matrix/linalg.norm(self.matrix, axis=0), normcols(self.matrix)))
 
 
-class Test_format_label_matrix(unittest.TestCase):
+class Test_LabelMatrixManager(unittest.TestCase):
 
-    def test_format_label_matrix(self):
-        input_label_matrix = np.array([0, 1, 0, 2, 2])
-        output_label_matrix = np.array([[1, 0, 1, 0, 0], [0, 1, 0, 0, 0], [0, 0, 0, 1, 1]])
+    def setUp(self):
+        self.labels_1d = np.array([0, 1, 0, 2, 2])
+        self.labels_2d = np.array([[1, 0, 1, 0, 0], [0, 1, 0, 0, 0], [0, 0, 0, 1, 1]])
+
+    def test_get_2d_matrix_from_1d_array(self):
         self.assertTrue(np.array_equal(
-            format_label_matrix(input_label_matrix), output_label_matrix
+            LabelMatrixManager.get_2d_matrix_from_1d_array(self.labels_1d),
+            self.labels_2d
         ))
 
-    def test_sorted_labels_args(self):
-        input_label_matrix = np.array([0, 1, 0, 2, 2])
+    def test_get_2d_matrix_from_1d_array_with_sorted_labels_args(self):
         sorted_labels = [2, 0, 1]
         output_label_matrix = np.array([[0, 0, 0, 1, 1], [1, 0, 1, 0, 0], [0, 1, 0, 0, 0]])
+
         self.assertFalse(np.array_equal(
-            format_label_matrix(input_label_matrix), output_label_matrix))
-        self.assertTrue(np.array_equal(
-            format_label_matrix(input_label_matrix, sorted_labels),
+            LabelMatrixManager.get_2d_matrix_from_1d_array(self.labels_1d),
             output_label_matrix
         ))
+        self.assertTrue(np.array_equal(
+            LabelMatrixManager.get_2d_matrix_from_1d_array(self.labels_1d, sorted_labels),
+            output_label_matrix
+        ))
+
+    def test_get_1d_array_from_2d_matrix(self):
+        self.assertTrue(
+            LabelMatrixManager.get_1d_array_from_2d_matrix(self.labels_2d), self.labels_2d)
 
 
 if __name__ == '__main__':
