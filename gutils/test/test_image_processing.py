@@ -36,7 +36,7 @@ class Test_get_patches(unittest.TestCase):
         for x in [0, 5, 10, 15]:
             for y in [0, 5, 10, 15]:
                 self.assertTrue(np.array_equal(
-                    self.image[x:x+width, y:y+height], next(patches)
+                    self.image[y:y+height, x:x+width], next(patches)
                 ))
 
     def test_exact_slices_with_overlapping(self):
@@ -47,7 +47,7 @@ class Test_get_patches(unittest.TestCase):
         for x in [0, 4, 8, 12, 15]:
             for y in [0, 4, 8, 12, 15]:
                 self.assertTrue(np.array_equal(
-                    self.image[x:x+width, y:y+height], next(patches)
+                    self.image[y:y+height, x:x+width], next(patches)
                 ))
 
     def test_different_height_and_width(self):
@@ -59,7 +59,7 @@ class Test_get_patches(unittest.TestCase):
         for x in get_slices_coords(20, width, 0):
             for y in get_slices_coords(20, height, 0):
                 self.assertTrue(np.array_equal(
-                    self.image[x:x+width, y:y+height], next(patches)
+                    self.image[y:y+height, x:x+width], next(patches)
                 ))
 
     def test_different_height_and_width_with_overlapping(self):
@@ -73,7 +73,7 @@ class Test_get_patches(unittest.TestCase):
         for x in get_slices_coords(20, width, overlap):
             for y in get_slices_coords(20, height, overlap):
                 self.assertTrue(np.array_equal(
-                    self.image[x:x+width, y:y+height], next(patches)
+                    self.image[y:y+height, x:x+width], next(patches)
                 ))
 
     def test_non_exact_patches(self):
@@ -85,7 +85,7 @@ class Test_get_patches(unittest.TestCase):
         for x in [0, 5, 10, 15, 16]:
             for y in [0, 5, 10, 15, 16]:
                 self.assertTrue(np.array_equal(
-                    self.image[x:x+width, y:y+height], next(patches)
+                    self.image[y:y+height, x:x+width], next(patches)
                 ))
 
     def test_non_exact_patches_with_overlapping(self):
@@ -98,7 +98,7 @@ class Test_get_patches(unittest.TestCase):
         for x in [0, 3, 6, 9, 12, 15, 16]:
             for y in [0, 3, 6, 9, 12, 15, 16]:
                 self.assertTrue(np.array_equal(
-                    self.image[x:x+width, y:y+height], next(patches)
+                    self.image[y:y+height, x:x+width], next(patches)
                 ))
 
     def test_non_exact_patches_different_height_and_width_with_overlapping(self):
@@ -111,10 +111,10 @@ class Test_get_patches(unittest.TestCase):
         patches = iter(get_patches(
             self.image, patch_width=width, patch_height=height, patch_overlapping=overlap))
 
-        for x in get_slices_coords(self.image.shape[0], width, overlap):
-            for y in get_slices_coords(self.image.shape[1], height, overlap):
+        for x in get_slices_coords(self.image.shape[1], width, overlap):
+            for y in get_slices_coords(self.image.shape[0], height, overlap):
                 self.assertTrue(np.array_equal(
-                    self.image[x:x+width, y:y+height], next(patches)
+                    self.image[y:y+height, x:x+width], next(patches)
                 ))
 
 

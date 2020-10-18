@@ -33,11 +33,11 @@ def get_slices_coords(dim_axis, patch_size=16, patch_overlapping=0):
 def get_patches(img, patch_width=16, patch_height=0, patch_overlapping=0):
     """
     Calculates and returns an iterator over the patches coordinates following the patch width,
-    height, and patch_overlapping provided. If not patch_height is provided then it set to
+    height, and patch_overlapping provided. If no patch_height is provided then it set to
     path_width by default.
 
     Args:
-        img        (np.ndarray): image loaded using numpy
+        img        (np.ndarray): image loaded using numpy with shape (height, weight)
         patch_width       (int): width of the patch
         patch_height      (int): height of the patch
         patch_overlapping (int): overlap of patches
@@ -56,6 +56,6 @@ def get_patches(img, patch_width=16, patch_height=0, patch_overlapping=0):
     if patch_height == 0:
         patch_height = patch_width
 
-    for x in get_slices_coords(img.shape[0], patch_width, patch_overlapping):
-        for y in get_slices_coords(img.shape[1], patch_height, patch_overlapping):
-            yield img[x:x+patch_width, y:y+patch_height]
+    for x in get_slices_coords(img.shape[1], patch_width, patch_overlapping):
+        for y in get_slices_coords(img.shape[0], patch_height, patch_overlapping):
+            yield img[y:y+patch_height, x:x+patch_width]
