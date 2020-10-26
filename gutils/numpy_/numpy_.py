@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 """ gutils/numpy_/numpy_ """
 
-import scipy as sp
 import numpy as np
+from scipy import linalg
 
 
 def colnorms_squared_new(matrix, blocksize=-1):
@@ -65,7 +65,7 @@ def normcols(matrix):
     """
     assert isinstance(matrix, np.ndarray)
 
-    return matrix/sp.linalg.norm(matrix, axis=0)
+    return matrix/linalg.norm(matrix, axis=0)
 
 
 class LabelMatrixManager:
