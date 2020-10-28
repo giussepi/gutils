@@ -68,6 +68,57 @@ def normcols(matrix):
     return matrix/linalg.norm(matrix, axis=0)
 
 
+def scale_using_general_min_max_values(data, min_val=0, max_val=0, feats_range=None, dtype=None):
+    """
+    Scales data to an interval ([0, 1] by default) and returns it. If min_val == max_val
+    then it calculates the min and max values from data.
+    IMPORTANT NOTE: Only use it if all the features have the same min and max values,
+    e.g. when using a flattened RGB image, all its values goes from 0 to 255
+
+    Args:
+        data         (np.ndarray): matrix data with shape (features) or (samples, features)
+        max_val           (float): maximum value of the data
+        min_val           (float): minimum value of the data
+        feats_range (list, tuple): range to scale the data
+        dtype       (numpy float): numpy data type to assign to the scaled data
+
+    Returns:
+        scaled_data (np.ndarray)
+    """
+    assert isinstance(data, np.ndarray)
+    assert max_val >= min_val
+    assert isinstance(feats_range, (list, tuple)) or feats_range is None,\
+        "the features range must be a list or tuple"
+    if dtype in (np.float, np.float16, np.float32, np.float64):
+        isinstance(dtype, type)
+        data = data.astype(dtype)
+
+    if feats_range is None:
+        feats_range = (0, 1)
+
+    feats_range = tuple(feats_range) if isinstance(feats_range, list) else feats_range
+
+    assert feats_range[0] < feats_range[1],\
+        "feats_range[0] must be lower than feats_range[1]"
+
+    if len(data.shape) == 1:
+        data = data[:, np.newaxis]
+
+    if min_val == max_val:
+        min_val = data.min()
+        max_val = data.max()
+
+    # scaling data to interval [0, 1]
+    scaled_data = (data - min_val) / (max_val - min_val)
+
+    if feats_range != (0, 1):
+        # normalizing to interval [x, y]
+        scaled_data *= (feats_range[1] - feats_range[0])
+        scaled_data += feats_range[0]
+
+    return scaled_data.squeeze()
+
+
 class LabelMatrixManager:
     """ Holds methods to transform label matrices from 1D to 2D and vice versa """
 
