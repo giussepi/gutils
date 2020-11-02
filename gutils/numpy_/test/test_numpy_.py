@@ -39,21 +39,24 @@ class Test_LabelMatrixManager(unittest.TestCase):
 
     def test_get_2d_matrix_from_1d_array(self):
         self.assertTrue(np.array_equal(
-            LabelMatrixManager.get_2d_matrix_from_1d_array(self.labels_1d),
+            LabelMatrixManager.get_2d_matrix_from_1d_array(self.labels_1d, 3),
             self.labels_2d
         ))
 
-    def test_get_2d_matrix_from_1d_array_with_sorted_labels_args(self):
-        sorted_labels = [2, 0, 1]
-        output_label_matrix = np.array([[0, 0, 0, 1, 1], [1, 0, 1, 0, 0], [0, 1, 0, 0, 0]])
+    def test_get_2d_matrix_from_1d_array_with_empty_labels(self):
+        labels_1d = np.array([0, 0, 3, 2, 3, 0, 5])
+        labels_2d = np.array([
+            [1, 1, 0, 0, 0, 1, 0],
+            [0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 1, 0, 0, 0],
+            [0, 0, 1, 0, 1, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 1],
+        ])
 
-        self.assertFalse(np.array_equal(
-            LabelMatrixManager.get_2d_matrix_from_1d_array(self.labels_1d),
-            output_label_matrix
-        ))
         self.assertTrue(np.array_equal(
-            LabelMatrixManager.get_2d_matrix_from_1d_array(self.labels_1d, sorted_labels),
-            output_label_matrix
+            LabelMatrixManager.get_2d_matrix_from_1d_array(labels_1d, 6),
+            labels_2d
         ))
 
     def test_get_1d_array_from_2d_matrix(self):

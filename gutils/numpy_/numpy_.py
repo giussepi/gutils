@@ -123,15 +123,14 @@ class LabelMatrixManager:
     """ Holds methods to transform label matrices from 1D to 2D and vice versa """
 
     @staticmethod
-    def get_2d_matrix_from_1d_array(label_array, sorted_labels=None):
+    def get_2d_matrix_from_1d_array(label_array, num_labels):
         """
         Transforms the 1D integer-encoded label_array to a 2D one-hot-encoded label_array
         and returns it
 
         Args:
             label_array    (np.ndarray): 1-D integer-encoded numpy array
-            sorted_labels (list, tuple): iterable with labels in the order to be used to create
-                                         the 2-D label matrix
+            num_labels            (int): number of labels/classes
 
         Returns:
             label matrix (np.ndarray) with shape (num labels, num samples). E.g.:
@@ -144,17 +143,11 @@ class LabelMatrixManager:
         assert isinstance(label_array, np.ndarray)
         label_array = label_array.squeeze()
         assert len(label_array.shape) == 1
+        assert isinstance(num_labels, int)
 
-        if sorted_labels is not None:
-            assert isinstance(sorted_labels, (list, tuple))
+        lmatrix = np.eye(num_labels)[label_array]
 
-        labels = sorted_labels if sorted_labels else sorted(set(label_array))
-        lmatrix = np.zeros([len(labels), label_array.shape[0]], dtype=np.int32)
-
-        for label, row in zip(labels, range(len(labels))):
-            lmatrix[row][label_array == label] = 1
-
-        return lmatrix
+        return lmatrix.T
 
     @staticmethod
     def get_1d_array_from_2d_matrix(label_matrix):
