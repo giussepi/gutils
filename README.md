@@ -1,11 +1,31 @@
 # G-utils
 
-# Installation
+## Installation
 
 Add to your requirements file:
 
-`git+git://github.com/giussepi/gutils.git`
+`gutils @ https://github.com/giussepi/gutils/tarball/master`
 
 or run
 
-`pip install git+git://github.com/giussepi/gutils.git`
+```bash
+pip install git+git://github.com/giussepi/gutils.git
+
+# or
+
+pip install https://github.com/giussepi/gutils/tarball/master
+```
+
+
+## Usage
+
+Explore the modules, load snippets and have fun! :blush::bowtie::nerd_face: E.g.:
+
+
+```python
+from gutils.decorators import timing
+
+@timing
+def my_function(*args, **kwargs):
+    pass
+```
