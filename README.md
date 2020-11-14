@@ -9,13 +9,12 @@ Add to your requirements file:
 or run
 
 ```bash
-pip install git+git://github.com/giussepi/gutils.git
+pip install git+git://github.com/giussepi/gutils.git --use-feature=2020-resolver --no-cache-dir
 
 # or
 
-pip install https://github.com/giussepi/gutils/tarball/master
+pip install https://github.com/giussepi/gutils/tarball/master  --use-feature=2020-resolver --no-cache-dir
 ```
-
 
 ## Usage
 
