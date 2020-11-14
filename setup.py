@@ -17,7 +17,8 @@ def _parse_requirements(filename: str) -> List[str]:
 
 
 setuptools.setup(
-    name="gutils-pkg-giussepi",  # Replace with your own username
+    # name="gutils-pkg-giussepi",  # Replace with your own username
+    name="gutils",
     version="0.0.1",
     author="Giussepi Lopez",
     author_email="giussepexy@gmail.com",
