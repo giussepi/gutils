@@ -119,6 +119,45 @@ def scale_using_general_min_max_values(data, min_val=0, max_val=0, feats_range=N
     return scaled_data.squeeze()
 
 
+def split_numpy_array(array, percentage, axis=0, shuffle=False):
+    """
+    Splits 1D or 2D numpy arrays based on the provided percentage
+
+    Args:
+        array (np.ndarray): 1D or 2D NumPy array
+        percentage (float): 0 < float < 1
+        axis         (int): 0 or 1
+        shuffle     (bool): Whether or not shuffle the array
+
+    Returns:
+        np.array, np.array
+    """
+    assert isinstance(array, np.ndarray)
+    assert len(array.shape) <= 2
+    assert 0 < percentage < 1
+    assert isinstance(axis, int)
+    assert 0 <= axis < len(array.shape)
+    assert isinstance(shuffle, bool)
+
+    indexes = np.array(range(array.shape[axis]))
+
+    if shuffle:
+        rng = np.random.default_rng()
+        rng.shuffle(indexes, 0)
+
+    split_index = int(array.shape[axis] * percentage)
+
+    # 1D array
+    if len(array.shape) == 1:
+        return array[indexes[:split_index]], array[indexes[split_index:]]
+
+    # 2D array
+    if axis == 0:
+        return array[indexes[:split_index], :], array[indexes[split_index:], :]
+
+    return array[:, indexes[:split_index]], array[:, indexes[split_index:]]
+
+
 class LabelMatrixManager:
     """ Holds methods to transform label matrices from 1D to 2D and vice versa """
 

@@ -7,7 +7,7 @@ import numpy as np
 from scipy import linalg
 
 from gutils.numpy_.numpy_ import colnorms_squared_new, normcols, LabelMatrixManager, \
-    scale_using_general_min_max_values
+    scale_using_general_min_max_values, split_numpy_array
 
 
 class MatrixMixin:
@@ -141,6 +141,63 @@ class Test_scale_using_general_min_max_values(unittest.TestCase):
             scaled_matrix,
             scale_using_general_min_max_values(self.matrix, min_val, max_val, feats_range)
         ))
+
+
+class Test_split_numpy_array(unittest.TestCase):
+
+    def test_1D_array(self):
+        array = np.array(np.random.rand(10))
+        bit1, bit2 = split_numpy_array(array, .3, 0, False)
+        self.assertTrue((3, 7), (bit1.shape[0], bit2.shape[0]))
+        self.assertTrue(np.array_equal(bit1, array[:3]))
+        self.assertTrue(np.array_equal(bit2, array[3:]))
+
+    def test_1D_array_with_shuffle(self):
+        array = np.array(np.random.rand(10))
+        bit1, bit2 = split_numpy_array(array, .3, 0, True)
+        self.assertTrue((3, 7), (bit1.shape[0], bit2.shape[0]))
+        self.assertFalse(np.array_equal(bit1, array[:3]))
+        self.assertFalse(np.array_equal(bit2, array[3:]))
+
+    def test_2D_array_axis_0(self):
+        axis = 0
+        array_2D = np.random.rand(20, 10)
+        bit1, bit2 = split_numpy_array(array_2D, .3, axis, False)
+        self.assertTrue((6, 14), (bit1.shape[axis], bit2.shape[axis]))
+        self.assertEqual((6, 10), bit1.shape)
+        self.assertEqual((14, 10), bit2.shape)
+        self.assertTrue(np.array_equal(bit1, array_2D[:6, :]))
+        self.assertTrue(np.array_equal(bit2, array_2D[6:, :]))
+
+    def test_2D_array_axis_0_with_shuffle(self):
+        axis = 0
+        array_2D = np.random.rand(20, 10)
+        bit1, bit2 = split_numpy_array(array_2D, .3, axis, True)
+        self.assertTrue((6, 14), (bit1.shape[axis], bit2.shape[axis]))
+        self.assertEqual((6, 10), bit1.shape)
+        self.assertEqual((14, 10), bit2.shape)
+        self.assertFalse(np.array_equal(bit1, array_2D[:6, :]))
+        self.assertFalse(np.array_equal(bit2, array_2D[6:, :]))
+
+    def test_2D_array_axis_1(self):
+        axis = 1
+        array_2D = np.random.rand(20, 10)
+        bit1, bit2 = split_numpy_array(array_2D, .3, axis, False)
+        self.assertTrue((3, 7), (bit1.shape[axis], bit2.shape[axis]))
+        self.assertEqual((20, 3), bit1.shape)
+        self.assertEqual((20, 7), bit2.shape)
+        self.assertTrue(np.array_equal(bit1, array_2D[:, :3]))
+        self.assertTrue(np.array_equal(bit2, array_2D[:, 3:]))
+
+    def test_2D_array_axis_1_with_shuffle(self):
+        axis = 1
+        array_2D = np.random.rand(20, 10)
+        bit1, bit2 = split_numpy_array(array_2D, .3, axis, True)
+        self.assertTrue((3, 7), (bit1.shape[axis], bit2.shape[axis]))
+        self.assertEqual((20, 3), bit1.shape)
+        self.assertEqual((20, 7), bit2.shape)
+        self.assertFalse(np.array_equal(bit1, array_2D[:, :3]))
+        self.assertFalse(np.array_equal(bit2, array_2D[:, 3:]))
 
 
 if __name__ == '__main__':

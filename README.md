@@ -64,6 +64,7 @@ def my_function(*args, **kwargs):
 - get_unique_rows
 - normcols
 - scale_using_general_min_max_values
+- split_numpy_array
 - LabelMatrixManager
 
 ### gutils/utils.py
