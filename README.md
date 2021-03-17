@@ -56,6 +56,9 @@ def my_function(*args, **kwargs):
 - get_slices_coords
 - get_patches
 
+### gutils/mock.py
+- notqdm
+
 ### gutils/numpy_/images.py
 - ZeroPadding
 
