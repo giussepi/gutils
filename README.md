@@ -70,5 +70,8 @@ def my_function(*args, **kwargs):
 - split_numpy_array
 - LabelMatrixManager
 
+### gutils/plot/tables.py
+- plot_color_table
+
 ### gutils/utils.py
 - get_random_string
