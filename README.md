@@ -52,6 +52,9 @@ def my_function(*args, **kwargs):
 - remove_folder
 - clean_create_folder
 
+### gutils/image_augmentation.py
+- ImageAugmentationProcessor
+
 ### gutils/image_processing.py
 - get_slices_coords
 - get_patches
