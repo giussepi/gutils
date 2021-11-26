@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-""" gutils/datasets/utils """
+""" gutils/datasets/utils/split """
 
 import numpy as np
 from sklearn.model_selection import train_test_split

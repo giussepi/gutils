@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-""" gutils/image_processing """
+""" gutils/images/processing """
 
 import numpy as np
 

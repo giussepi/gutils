@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-""" image_augmentation """
+""" gutils/images/augmentation """
 
 import os
 import re

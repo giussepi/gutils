@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
-""" gutils/datasets/test/test_utils """
+""" gutils/datasets/test/test_split """
 
 import unittest
 
 import numpy as np
 
-from gutils.datasets.utils import calculate_train_val_percentages, TrainValTestSplit
+from gutils.datasets.utils.split import calculate_train_val_percentages, TrainValTestSplit
 from gutils.numpy_.numpy_ import LabelMatrixManager
 
 

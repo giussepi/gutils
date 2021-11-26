@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
-""" gutils/test/test_image_processing """
+""" gutils/images/test/test_processing """
 
 import unittest
 
 import numpy as np
 
-from gutils.image_processing import get_slices_coords, get_patches
+from gutils.images.processing import get_slices_coords, get_patches
 
 
 class Test_get_slices_coords(unittest.TestCase):
