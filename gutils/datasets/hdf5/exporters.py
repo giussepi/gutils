@@ -17,8 +17,12 @@ class Images2HDF5:
     """
     General handler to export a classification/segmentation dataset into an HDF5 file
 
-    Note: When using masks the images (e.g. *.ann.tiff) and masks (e.g. *.mask.png)
+    Note:
+        * When using masks the images (e.g. *.ann.tiff) and masks (e.g. *.mask.png)
           must have the same filename and only differ in the extension.
+        * When using PyTorch, you can load the exported dataset using the class
+          gtorch_utils.datasets.segmentation.hdf5.HDF5Dataset
+          (see https://github.com/giussepi/gtorch_utils)
 
     Usage:
         # Classification dataset
