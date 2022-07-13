@@ -71,7 +71,7 @@ def normcols(matrix):
 
 
 def scale_using_general_min_max_values(
-        data: np.ndarray, min_val: Union[int, float] = 0, max_val: Union[int, float] = 0,
+        data: np.ndarray, /, *, min_val: Union[int, float] = 0, max_val: Union[int, float] = 0,
         feats_range: Union[list, tuple, None] = None, dtype: Optional[type] = None):
     r"""
     Scales data to an interval ([0, 1] by default) and returns it. If min_val == max_val
