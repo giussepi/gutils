@@ -106,6 +106,16 @@ class Test_scale_using_general_min_max_values(unittest.TestCase):
             scale_using_general_min_max_values(self.vector, min_val, max_val, feats_range)
         ))
 
+    def test_vector_min_max_range_no_min_max_values(self):
+        feats_range = [10, 20]
+        scaled_vector = (self.vector - self.vector.min()) / (self.vector.max() - self.vector.min())
+        scaled_vector *= feats_range[1] - feats_range[0]
+        scaled_vector += feats_range[0]
+        self.assertTrue(np.array_equal(
+            scaled_vector,
+            scale_using_general_min_max_values(self.vector, feats_range=feats_range)
+        ))
+
     def test_matrix_default_args(self):
         scaled_matrix = (self.matrix - self.matrix.min()) / (self.matrix.max() - self.matrix.min())
         self.assertTrue(np.array_equal(
@@ -140,6 +150,16 @@ class Test_scale_using_general_min_max_values(unittest.TestCase):
         self.assertTrue(np.array_equal(
             scaled_matrix,
             scale_using_general_min_max_values(self.matrix, min_val, max_val, feats_range)
+        ))
+
+    def test_matrix_min_max_range_no_min_max_values(self):
+        feats_range = [10.1, 20.2]
+        scaled_matrix = (self.matrix - self.matrix.min()) / (self.matrix.max() - self.matrix.min())
+        scaled_matrix *= feats_range[1] - feats_range[0]
+        scaled_matrix += feats_range[0]
+        self.assertTrue(np.array_equal(
+            scaled_matrix,
+            scale_using_general_min_max_values(self.matrix, feats_range=feats_range)
         ))
 
 

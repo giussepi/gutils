@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 """ gutils/numpy_/numpy_ """
 
+from typing import Union, Optional
+
 import numpy as np
 from scipy import linalg
 
@@ -68,28 +70,33 @@ def normcols(matrix):
     return matrix/linalg.norm(matrix, axis=0)
 
 
-def scale_using_general_min_max_values(data, min_val=0, max_val=0, feats_range=None, dtype=None):
-    """
+def scale_using_general_min_max_values(
+        data: np.ndarray, min_val: Union[int, float] = 0, max_val: Union[int, float] = 0,
+        feats_range: Union[list, tuple, None] = None, dtype: Optional[type] = None):
+    r"""
     Scales data to an interval ([0, 1] by default) and returns it. If min_val == max_val
     then it calculates the min and max values from data.
-    IMPORTANT NOTE: Only use it if all the features have the same min and max values,
-    e.g. when using a flattened RGB image, all its values goes from 0 to 255
+
+    scaled_01 = \frac{ (x - min(x)) }{ (max(x) - min(x)) }
+    new_range = (new_max - new_min) * scaled_01 + new_min
 
     Args:
         data         (np.ndarray): matrix data with shape (features) or (samples, features)
-        max_val           (float): maximum value of the data
-        min_val           (float): minimum value of the data
-        feats_range (list, tuple): range to scale the data
-        dtype       (numpy float): numpy data type to assign to the scaled data
+        max_val      (int, float): maximum value of the data. Default 0
+        min_val      (int, float): minimum value of the data. Default 0
+        feats_range (list, tuple): range to scale the data. Default (0, 1)
+        dtype              (type): numpy data type to assign to the scaled data
 
     Returns:
         scaled_data (np.ndarray)
     """
     assert isinstance(data, np.ndarray)
+    assert isinstance(min_val, (int, float)), type(min_val)
+    assert isinstance(max_val, (int, float)), type(max_val)
     assert max_val >= min_val
     assert isinstance(feats_range, (list, tuple)) or feats_range is None,\
         "the features range must be a list or tuple"
-    if dtype in (np.float, np.float16, np.float32, np.float64):
+    if dtype is not None:
         isinstance(dtype, type)
         data = data.astype(dtype)
 
@@ -101,22 +108,20 @@ def scale_using_general_min_max_values(data, min_val=0, max_val=0, feats_range=N
     assert feats_range[0] < feats_range[1],\
         "feats_range[0] must be lower than feats_range[1]"
 
-    if len(data.shape) == 1:
-        data = data[:, np.newaxis]
-
-    if min_val == max_val:
-        min_val = data.min()
-        max_val = data.max()
-
     # scaling data to interval [0, 1]
-    scaled_data = (data - min_val) / (max_val - min_val)
+    if min_val == max_val:
+        scaled_data = data - data.min()
+        scaled_data = scaled_data / scaled_data.max()
+    else:
+        scaled_data = (data - min_val) / (max_val - min_val)
 
+    # scaling to new range
     if feats_range != (0, 1):
         # normalizing to interval [x, y]
         scaled_data *= (feats_range[1] - feats_range[0])
         scaled_data += feats_range[0]
 
-    return scaled_data.squeeze()
+    return scaled_data
 
 
 def split_numpy_array(array, percentage, axis=0, shuffle=False):
