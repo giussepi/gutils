@@ -103,7 +103,7 @@ class Test_scale_using_general_min_max_values(unittest.TestCase):
         scaled_vector += feats_range[0]
         self.assertTrue(np.array_equal(
             scaled_vector,
-            scale_using_general_min_max_values(self.vector, min_val, max_val, feats_range)
+            scale_using_general_min_max_values(self.vector, min_val=min_val, max_val=max_val, feats_range=feats_range)
         ))
 
     def test_vector_min_max_range_no_min_max_values(self):
@@ -149,7 +149,7 @@ class Test_scale_using_general_min_max_values(unittest.TestCase):
         scaled_matrix += feats_range[0]
         self.assertTrue(np.array_equal(
             scaled_matrix,
-            scale_using_general_min_max_values(self.matrix, min_val, max_val, feats_range)
+            scale_using_general_min_max_values(self.matrix, min_val=min_val, max_val=max_val, feats_range=feats_range)
         ))
 
     def test_matrix_min_max_range_no_min_max_values(self):
