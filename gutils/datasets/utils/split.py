@@ -75,7 +75,7 @@ class TrainValTestSplit:
             test_size    (float): test dataset size in range [0, 1]
 
         Kwargs:
-            random_stat   e (int): Controls the shuffling applied to the data before applying the split.
+            random_state    (int): Controls the shuffling applied to the data before applying the split.
             shuffle        (bool): Whether or not to shuffle the data before splitting.
             stratify (np.ndarray): If not None, data is split in a stratified fashion, using this as the class labels.
         """
@@ -112,7 +112,7 @@ class TrainValTestSplit:
 
         x_train_val, x_test, y_train_val, y_test = train_test_split(
             self.samples, self.targets, test_size=self.test_size,
-            random_state=self.random_state, stratify=self.stratify
+            random_state=self.random_state, stratify=self.stratify, shuffle=self.shuffle
         )
 
         train_val_size = calculate_train_val_percentages(self.val_size, self.test_size)[1]
@@ -120,7 +120,9 @@ class TrainValTestSplit:
         x_train, x_val, y_train, y_val = train_test_split(
             x_train_val, y_train_val, test_size=train_val_size,
             random_state=self.random_state,
-            stratify=y_train_val if self.stratify is not None else None
+            stratify=y_train_val if self.stratify is not None else None,
+            shuffle=self.shuffle
         )
 
         return x_train, x_val, x_test, y_train, y_val, y_test
+
