@@ -1,3 +1,4 @@
+
 # G-utils
 
 ## Installation
@@ -89,7 +90,8 @@ def my_function(*args, **kwargs):
 - split_numpy_array
 - LabelMatrixManager
 
-### gutils/plot/tables.py
+### gutils/plot
+- BoxPlot
 - plot_color_table
 
 ### gutils/utils.py

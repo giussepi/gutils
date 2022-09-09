@@ -6,6 +6,9 @@ import matplotlib.pyplot as plt
 from matplotlib.patches import Rectangle
 
 
+__all__ = ['plot_color_table']
+
+
 def plot_color_table(colors, title, sort_colors=True, emptycols=0):
     """
     Plots a table of colours
