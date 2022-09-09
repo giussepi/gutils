@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
-""" gutils/plot/test/test_tables """
+""" gutils/plots/test/test_tables """
 
 import unittest
 
 import matplotlib.colors as mcolors
 from matplotlib.figure import Figure
 
-from gutils.plot.tables import plot_color_table
+from gutils.plots.tables import plot_color_table
 
 
 class Test_plot_color_table(unittest.TestCase):

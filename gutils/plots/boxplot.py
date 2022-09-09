@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
-""" gutils/plot/boxplot """
+""" gutils/plots/boxplot """
 
 import matplotlib.pyplot as plt
 import numpy as np
 
 
-__all__  = ['BoxPlot']
+__all__ = ['BoxPlot']
 
 
 class BoxPlot:

@@ -90,7 +90,7 @@ def my_function(*args, **kwargs):
 - split_numpy_array
 - LabelMatrixManager
 
-### gutils/plot
+### gutils/plots
 - BoxPlot
 - plot_color_table
 

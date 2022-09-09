@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-""" gutils/plot/tables """
+""" gutils/plots/tables """
 
 import matplotlib.colors as mcolors
 import matplotlib.pyplot as plt
