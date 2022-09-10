@@ -72,6 +72,11 @@ def my_function(*args, **kwargs):
 ### gutils/images/augmentation.py
 - ImageAugmentationProcessor
 
+### gutils/images/images
+- DICOM [needs tests]
+- NIfTI [needs tests]
+- ProNIfTI [needs tests]
+
 ### gutils/images/processing.py
 - get_slices_coords
 - get_patches
