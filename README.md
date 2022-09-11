@@ -1,4 +1,3 @@
-
 # G-utils
 
 ## Installation
@@ -104,7 +103,12 @@ def my_function(*args, **kwargs):
 
 
 ## Development
-After modifying or adding new modules make sure to set QUICK_TEST to False at `gutils/settings.py` and execute all the tests `./run_tests.sh`.
+After modifying or adding new modules with their respetive tests, make sure to do the following before committing any update:
+1. Set QUICK_TEST to False at `gutils/settings.py`
+2. Get the test datasets by running `./get_test_datasets.sh`
+3. Execute all the tests `./run_tests.sh`.
+4. Discard changes at the settings by executing `git checkout gutils/settings.py`
+5. Commit your changes
 
 A few of our tests employs two cases from the  **NIH-TCIA CT Pancreas benchmark (CT-82)**  [[1]](#1).
 

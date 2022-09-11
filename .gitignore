@@ -130,3 +130,6 @@ dmypy.json
 
 # emacs
 *~
+
+# test datasets
+gutils_test_datasets/

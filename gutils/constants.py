@@ -4,7 +4,7 @@
 import os
 
 
-TEST_DATASET_PATH = os.path.join('gutils', 'images', 'images', 'test', 'test_datasets', 'CT-82')
+TEST_DATASET_PATH = os.path.join('gutils_test_datasets', 'TINY-CT-82')
 TEST_IMAGES_PATH = os.path.join(TEST_DATASET_PATH, 'images')
 TEST_MASKS_PATH = os.path.join(TEST_DATASET_PATH, 'labels')
 
