@@ -73,9 +73,9 @@ def my_function(*args, **kwargs):
 - ImageAugmentationProcessor
 
 ### gutils/images/images
-- DICOM [needs tests]
-- NIfTI [needs tests]
-- ProNIfTI [needs tests]
+- DICOM
+- NIfTI
+- ProNIfTI
 
 ### gutils/images/processing.py
 - get_slices_coords
@@ -105,3 +105,9 @@ def my_function(*args, **kwargs):
 
 ## TODO
 - [ ] Write more tests
+
+
+A few of our tests employs two cases from the  **NIH-TCIA CT Pancreas benchmark (CT-82)**  [[1]](#1).
+
+## References
+<a id="1">[1]</a>  Holger R. Roth, Amal Farag, Evrim B. Turkbey, Le Lu, Jiamin Liu, and Ronald M. Summers. (2016). Data From Pancreas-CT. The Cancer Imaging Archive. [https://doi.org/10.7937/K9/TCIA.2016.tNB1kqBU](https://doi.org/10.7937/K9/TCIA.2016.tNB1kqBU)

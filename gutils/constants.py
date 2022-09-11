@@ -1,6 +1,14 @@
 # -*- coding: utf-8 -*-
 """ gutils/constants """
 
+import os
+
+
+TEST_DATASET_PATH = os.path.join('gutils', 'images', 'images', 'test', 'test_datasets', 'CT-82')
+TEST_IMAGES_PATH = os.path.join(TEST_DATASET_PATH, 'images')
+TEST_MASKS_PATH = os.path.join(TEST_DATASET_PATH, 'labels')
+
+
 class AugmentationType:
     """ Holds the augmentation transforms types  """
     PIXEL_LEVEL = 0  # Pixel-level transforms
