@@ -103,11 +103,14 @@ def my_function(*args, **kwargs):
 - get_random_string
 
 
+## Development
+After modifying or adding new modules make sure to set QUICK_TEST to False at `gutils/settings.py` and execute all the tests `./run_tests.sh`.
+
+A few of our tests employs two cases from the  **NIH-TCIA CT Pancreas benchmark (CT-82)**  [[1]](#1).
+
 ## TODO
 - [ ] Write more tests
 
-
-A few of our tests employs two cases from the  **NIH-TCIA CT Pancreas benchmark (CT-82)**  [[1]](#1).
 
 ## References
 <a id="1">[1]</a>  Holger R. Roth, Amal Farag, Evrim B. Turkbey, Le Lu, Jiamin Liu, and Ronald M. Summers. (2016). Data From Pancreas-CT. The Cancer Imaging Archive. [https://doi.org/10.7937/K9/TCIA.2016.tNB1kqBU](https://doi.org/10.7937/K9/TCIA.2016.tNB1kqBU)
