@@ -65,7 +65,7 @@ class ProNIfTI(NIfTI):
             data.append(dicom.ndarray[:, :, np.newaxis])
 
         data = np.concatenate(data, axis=2)
-        new_nifti = nib.Nifti1Image(data, affine=np.eye(4))
+        new_nifti = nib.Nifti1Image(data, affine=np.eye(4), dtype=np.int64)
         nib.save(new_nifti, saving_path)
 
     def plot(self, rows: int = 2, cols: int = 2, /):

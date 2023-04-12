@@ -129,7 +129,7 @@ class NIfTI:
         assert isinstance(ndarray, np.ndarray), type(ndarray)
         assert isinstance(file_path, str), type(file_path)
 
-        img = nib.Nifti1Image(ndarray, np.eye(4))
+        img = nib.Nifti1Image(ndarray, np.eye(4), dtype=np.int64)
         nib.save(img, file_path)
 
     def save(self):
