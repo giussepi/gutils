@@ -43,12 +43,14 @@ pip install https://github.com/giussepi/gutils/tarball/master  --use-feature=202
 5. Get the test datasets by running:
 
 	```bash
+	chmod +x get_test_datasets.sh
 	./get_test_datasets.sh`
 	```
 
 6. Execute all the tests.
 
 	```bash
+	chmod +x run_tests.sh
 	./run_tests.sh
 	```
 
