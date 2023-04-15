@@ -1,0 +1,4 @@
+# -*- coding: utf-8 -*-
+""" settings """
+
+QUICK_TESTS = False
