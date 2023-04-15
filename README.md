@@ -2,11 +2,25 @@
 
 ## Installation
 
+### Package installation
+
 Add to your requirements file:
 
-`gutils @ https://github.com/giussepi/gutils/tarball/master`
+``` bash
+# use the latest version
 
-or run
+gutils @ https://github.com/giussepi/gutils/tarball/master
+
+# or use a specific release (format 1)
+
+gutils @ https://github.com/giussepi/gutils/archive/refs/tags/v1.2.1.tar.gz
+
+# or use a specific release (format 2)
+
+gutils @ git+https://github.com/giussepi/gutils.git@v1.2.1
+```
+
+or install it directly:
 
 ```bash
 pip install git+git://github.com/giussepi/gutils.git --use-feature=2020-resolver --no-cache-dir
@@ -15,6 +29,34 @@ pip install git+git://github.com/giussepi/gutils.git --use-feature=2020-resolver
 
 pip install https://github.com/giussepi/gutils/tarball/master  --use-feature=2020-resolver --no-cache-dir
 ```
+
+### Development installation
+
+1. Clone this repository.
+2. Create your local settings:
+
+	```bash
+	cp settings.py.template settings.py
+	```
+3. Ensure QUICK_TEST is to False at `settings.py`
+4. Modify or add new modules/features with their respective tests
+5. Get the test datasets by running:
+
+	```bash
+	./get_test_datasets.sh`
+	```
+
+6. Execute all the tests.
+
+	```bash
+	./run_tests.sh
+	```
+
+7. If all the tests pass, commit your changes.
+
+
+A few of our tests employs two cases from the  **NIH-TCIA CT Pancreas benchmark (CT-82)** [^1] [^2] [^3]
+
 
 ## Usage
 
@@ -28,6 +70,8 @@ from gutils.decorators import timing
 def my_function(*args, **kwargs):
     pass
 ```
+
+
 
 
 ## Tools available:
@@ -101,32 +145,6 @@ def my_function(*args, **kwargs):
 ### gutils/utils.py
 - get_random_string
 
-
-## Development
-After modifying or adding new modules with their respetive tests, make sure to do the following before committing any update:
-
-1. Clone this repository.
-2. Create your local settings:
-
-	```bash
-	cp settings.py.template settings.py
-	```
-4. Ensure QUICK_TEST is to False at `settings.py`
-5. Get the test datasets by running:
-
-	```bash
-	./get_test_datasets.sh`
-	```
-
-6. Execute all the tests.
-
-	```bash
-	./run_tests.sh
-	```
-
-7. Commit your changes.
-
-A few of our tests employs two cases from the  **NIH-TCIA CT Pancreas benchmark (CT-82)** [^1] [^2] [^3]
 
 ## TODO
 - [ ] Write more tests
